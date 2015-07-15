@@ -8,7 +8,7 @@ output:
 ## Install and Load Libraries
 ```{r}
 # Auto Install Packages
-list.of.packages <- c("dplyr", "ggplot2")
+list.of.packages <- c("dplyr", "ggplot2", "knitr")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
 if(length(new.packages)) install.packages(new.packages)
@@ -16,20 +16,32 @@ if(length(new.packages)) install.packages(new.packages)
 ## Bring in the libs.
 library(dplyr)
 library(ggplot2)
+library(knitr)
 ```
 
 ## Loading and preprocessing the data
 ```{r}
-  activity <- read.csv((unz("activity.zip", "activity.csv")))
-  activity <- activity %>%
-    mutate(date = as.Date(date))
+    activity <- read.csv((unz("activity.zip", "activity.csv")))
+    activity <- activity %>%
+        mutate(date = as.Date(date))
 ```
 
 
 
 ## What is mean total number of steps taken per day?
+### TODO -- not doing the total calculation, per instructions
+```{r kable}
+    daily_activity <- activity %>%
+        filter(!is.na(steps)) %>%
+        group_by(date) %>%
+        summarise(avgActivity = mean(steps, na.rm = TRUE))
 
+    g <- ggplot(data = daily_activity, aes(avgActivity)) + 
+        geom_histogram(binwidth = 8)
 
+    print(g)
+    
+```
 
 ## What is the average daily activity pattern?
 
