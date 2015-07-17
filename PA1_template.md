@@ -124,7 +124,7 @@ For this part of the assignment, you can ignore the missing values in the datase
     ap_high_interval_steps <- ap_ordered[1, 4]
 ```
 
-** The 5 minute interval 835 has the highest number of average steps per day, with 206.17 steps per interval. **
+The 5 minute interval 835 has the highest number of average steps per day, with 206.17 steps per interval. 
 
 ## Imputing missing values
 
