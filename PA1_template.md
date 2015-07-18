@@ -4,7 +4,7 @@
 
 ```r
 # Auto Install Packages
-list.of.packages <- c("dplyr", "ggplot2", "knitr", "xtable")
+list.of.packages <- c("dplyr", "ggplot2", "knitr", "lubridate")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
 if(length(new.packages)) install.packages(new.packages)
@@ -13,7 +13,7 @@ if(length(new.packages)) install.packages(new.packages)
 library(dplyr)
 library(ggplot2)
 library(knitr)
-library(xtable)
+library(lubridate)
 
 ## Knitr setup for rounding:
 options(scipen = 1, digits = 2)
@@ -219,3 +219,15 @@ There were **10766.19** steps taken per day.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.
+
+#### 1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+
+```r
+weekday_or_weekend <- function(date) {
+      
+}
+#daily_activity_imputed2 <- daily_activity_imputed %>%
+```
+
+#### 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.

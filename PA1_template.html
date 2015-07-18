@@ -67,7 +67,7 @@ img {
 <div id="install-and-load-libraries" class="section level2">
 <h2>Install and Load Libraries</h2>
 <pre class="r"><code># Auto Install Packages
-list.of.packages &lt;- c(&quot;dplyr&quot;, &quot;ggplot2&quot;, &quot;knitr&quot;, &quot;xtable&quot;)
+list.of.packages &lt;- c(&quot;dplyr&quot;, &quot;ggplot2&quot;, &quot;knitr&quot;, &quot;lubridate&quot;)
 new.packages &lt;- list.of.packages[!(list.of.packages %in% installed.packages()[,&quot;Package&quot;])]
 
 if(length(new.packages)) install.packages(new.packages)
@@ -76,7 +76,7 @@ if(length(new.packages)) install.packages(new.packages)
 library(dplyr)
 library(ggplot2)
 library(knitr)
-library(xtable)
+library(lubridate)
 
 ## Knitr setup for rounding:
 options(scipen = 1, digits = 2)</code></pre>
@@ -262,6 +262,17 @@ activity_imputed &lt;- bind_rows(clean_activity, fixed_nas)</code></pre>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
+<p>For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.</p>
+<div id="create-a-new-factor-variable-in-the-dataset-with-two-levels-weekday-and-weekend-indicating-whether-a-given-date-is-a-weekday-or-weekend-day." class="section level4">
+<h4>1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</h4>
+<pre class="r"><code>weekday_or_weekend &lt;- function(date) {
+      
+}
+#daily_activity_imputed2 &lt;- daily_activity_imputed %&gt;%</code></pre>
+</div>
+<div id="make-a-panel-plot-containing-a-time-series-plot-i.e.type-l-of-the-5-minute-interval-x-axis-and-the-average-number-of-steps-taken-averaged-across-all-weekday-days-or-weekend-days-y-axis.-see-the-readme-file-in-the-github-repository-to-see-an-example-of-what-this-plot-should-look-like-using-simulated-data." class="section level4">
+<h4>2. Make a panel plot containing a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.</h4>
+</div>
 </div>
 
 
