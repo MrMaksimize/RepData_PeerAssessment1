@@ -122,7 +122,7 @@ ap_max_int <- ap_ordered[1, 1]
 ap_max_int_steps <- ap_ordered[1, 4]
 ```
 
-The 5 minute interval **`r ap_max_int`** has the highest number of average steps per day, with **`r ap_max_int_steps`** average steps per interval. 
+The 5 minute interval **`r ap_max_int`** has the highest number of average steps per day, with **`r ap_max_int_steps`** average steps across all the days. 
 
 ***
 

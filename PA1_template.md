@@ -349,7 +349,7 @@ ap_max_int <- ap_ordered[1, 1]
 ap_max_int_steps <- ap_ordered[1, 4]
 ```
 
-The 5 minute interval **835** has the highest number of average steps per day, with **206.2** average steps per interval. 
+The 5 minute interval **835** has the highest number of average steps per day, with **206.2** average steps across all the days. 
 
 ***
 
@@ -431,6 +431,8 @@ There was a median of **10766.2** steps taken per day.
 I thought having the median = mean was a mistake at first, but it actually makes sense. Since we're using the mean value, it causes a lot of frequency of the mean number, and when the median is calculated that number is likely to end up in the middle.
 
 ##### 4C. Do these values differ from the estimates from the first part of the assignment? 
+
+The charts below have been adjusted to display at the same scale y-scale.  We can see that there is a difference in the frequency, but not a large difference in the pattern itself.
 
 <img src="PA1_template_files/figure-html/total_da_hist_comp-1.png" title="" alt="" style="float:left" />
 
