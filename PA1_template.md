@@ -21,29 +21,32 @@ options(scipen = 1, digits = 1)
 ## Loading and preprocessing the data
 
 ```r
-    # Load the data from CSV
-    activity <- read.csv((unz("activity.zip", "activity.csv")))
-    
-    # Turn the date column into actual dates.    
-    activity <- activity %>%
-        mutate(date = as.Date(date))
+# Load the data from CSV
+activity <- read.csv((unz("activity.zip", "activity.csv")))
 
-    # Create a clean activity data frame, 
-    # excluding missing values for later use.
-    clean_activity <- filter(activity, !is.na(steps))
+# Turn the date column into actual dates.    
+activity <- activity %>%
+    mutate(date = as.Date(date))
+
+# Create a clean activity data frame, 
+# excluding missing values for later use.
+clean_activity <- filter(activity, !is.na(steps))
 ```
 
 ***
 
 ## What is mean total number of steps taken per day?
-##### 1. Calculate the total number of steps taken per day
+##### 1. Calculate the total number of steps taken per day.
+
+I am including an output table below to show that I have calculated the total # of steps taken per day.
+
 
 ```r
-    total_da <- clean_activity %>%
-        group_by(date) %>%
-        summarise(sum_steps = sum(steps))    
+total_da <- clean_activity %>%
+    group_by(date) %>%
+    summarise(sum_steps = sum(steps))    
 
-    kable(total_da, digits=1, row.names = FALSE, format="html")
+kable(total_da, digits=1, row.names = FALSE, format="html")
 ```
 
 <table>
@@ -272,15 +275,15 @@ options(scipen = 1, digits = 1)
 ##### 2. Make a histogram of the total number of steps taken each day
 
 ```r
-    total_da_hist <- ggplot(data = total_da, aes(sum_steps)) + 
-        labs(
-            title="Total Daily Steps",
-            x = "Sum of Steps",
-            y = "Frequency"
-        ) + 
-        geom_histogram()
+total_da_hist <- ggplot(data = total_da, aes(sum_steps)) + 
+    labs(
+        title="Total Daily Steps",
+        x = "Sum of Steps",
+        y = "Frequency"
+    ) + 
+    geom_histogram()
 
-    print(total_da_hist)
+print(total_da_hist)
 ```
 
 <img src="PA1_template_files/figure-html/total_da_hist-1.png" title="" alt="" style="display: block; margin: auto;" />
@@ -289,11 +292,11 @@ options(scipen = 1, digits = 1)
 
 
 ```r
-    # No reason to include na.rm = TRUE here because of the cleaning 
-    # we did to generate the clean_activity df, which is what this is
-    # based on.
-    mean_steps <- mean(total_da$sum_steps)
-    median_steps <- median(total_da$sum_steps)
+# No reason to include na.rm = TRUE here because of the cleaning 
+# we did to generate the clean_activity df, which is what this is
+# based on.
+mean_steps <- mean(total_da$sum_steps)
+median_steps <- median(total_da$sum_steps)
 ```
 
 ##### Mean Steps Taken Per Day: 
@@ -310,27 +313,27 @@ There was a median of **10765** steps taken per day.
 
 
 ```r
-    # Get # of days where interval is present.
-    n_days <- count(clean_activity, interval)
+# Get # of days where interval is present.
+n_days <- count(clean_activity, interval)
 
-    activity_pattern <- clean_activity %>%
-        group_by(interval) %>%
-        summarise(sum_steps = sum(steps)) %>%
-        inner_join(n_days, c("interval")) %>%
-        mutate(avg_steps = sum_steps / n)
+activity_pattern <- clean_activity %>%
+    group_by(interval) %>%
+    summarise(sum_steps = sum(steps)) %>%
+    inner_join(n_days, c("interval")) %>%
+    mutate(avg_steps = sum_steps / n)
 
-    ## Using ggplot2, since assignment allows using any plotting system.
-    g <- ggplot(
-            data = activity_pattern, 
-            aes(x = interval, y = avg_steps)
-        ) + 
-        labs(
-            title = "Average Daily Activity Pattern",
-            x = "Interval",
-            y = "Average Steps Per Interval"
-        ) + 
-        geom_line()
-    print(g)
+## Using ggplot2, since assignment allows using any plotting system.
+g <- ggplot(
+        data = activity_pattern, 
+        aes(x = interval, y = avg_steps)
+    ) + 
+    labs(
+        title = "Average Daily Activity Pattern",
+        x = "Interval",
+        y = "Average Steps"
+    ) + 
+    geom_line()
+print(g)
 ```
 
 <img src="PA1_template_files/figure-html/activity_pattern-1.png" title="" alt="" style="display: block; margin: auto;" />
@@ -338,9 +341,12 @@ There was a median of **10765** steps taken per day.
 ##### 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ```r
-    ap_ordered <- arrange(activity_pattern, desc(avg_steps))
-    ap_max_int <- ap_ordered[1, 1]
-    ap_max_int_steps <- ap_ordered[1, 4]
+# Order activity pattern by descending.
+ap_ordered <- arrange(activity_pattern, desc(avg_steps))
+# Grab interval from the first row.
+ap_max_int <- ap_ordered[1, 1]
+# Grab steps from the first row.
+ap_max_int_steps <- ap_ordered[1, 4]
 ```
 
 The 5 minute interval **835** has the highest number of average steps per day, with **206.2** average steps per interval. 
@@ -361,7 +367,7 @@ There are a total of **2304** missing values in the dataset.
 
 ##### 2. Devise a strategy for filling in all of the missing values in the dataset. 
 
-**I have chosen the strategy that consists of replacing missing values with with the average number of steps taken in that interval, averaged across all days we have data for.** 
+I have chosen the strategy that consists of replacing missing values with with the average number of steps taken in that interval, averaged across all days we have data for.
 
 ##### 3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
